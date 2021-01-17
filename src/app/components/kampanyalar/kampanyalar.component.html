@@ -1,0 +1,58 @@
+
+<div class="container mt-5">
+  <div class="row">
+
+    <div class="col-md-4">
+      <h4>Kayıt Ekle Düzenle</h4>
+      <hr>
+      <form #frm="ngForm" (submit)="Kaydet()">
+        <div class="form-group ">
+          <label>Kampanya</label>
+          <input type="text" class="form-control" name="kampanya" [(ngModel)]="secKayit.kampanya" required>
+          <input type="hidden" class="form-control" name="key" [(ngModel)]="secKayit.key">
+        </div>
+        <div class="form-group">
+          <label>Kampanyalı Fiyat</label>
+          <input type="text" class="form-control" name="kampanyalifiyat" [(ngModel)]="secKayit.kampanyaliFiyat" required>
+          <input type="hidden" class="form-control" name="key" [(ngModel)]="secKayit.key">
+        </div>
+
+        <div class="form-group">
+          <input type="submit" value="Kaydet" class="btn btn-outline-success" [disabled]="frm.invalid">
+
+        </div>
+      </form>
+      <button class="btn btn-outline-danger" (click)="Vazgec()">Vazgeç</button>
+      <div [ngClass]="sonuc.islem ? 'alert alert-success':'alert alert-danger'" *ngIf="sonuc.mesaj?.length>0">
+        {{sonuc.mesaj}}</div>
+    </div>
+    <div class="col-md-8">
+      <h4>ÜRÜNLER</h4>
+      <table class="table table-dark">
+        <thead>
+          <th>Kampanya</th>
+          <th>Kampanyalı Fiyat</th>
+          <th>Kayıt Tarihi</th>
+          <th>Güncelleme Tarihi</th>
+          <th>Düzenle</th>
+          <th>Sil</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let kayit of kayitlar">
+            <td>{{kayit.kampanya}}</td>
+            <td>{{kayit.kampanyaliFiyat}}</td>
+
+            <td>{{kayit.kayTarih | date:'dd.MM.yyyy HH:mm:ss'}}</td>
+            <td>{{kayit.duzTarih | date:'dd.MM.yyyy HH:mm:ss'}}</td>
+            <td><button class="btn btn-outline-warning" (click)="KayitDuzenle(kayit)">Düzenle</button></td>
+            <td><button class="btn btn-outline-danger" (click)="KayitSil(kayit)">Sil</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <hr>
+    </div>
+  </div>
+</div>
+
+
+
